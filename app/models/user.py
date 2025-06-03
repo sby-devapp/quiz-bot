@@ -12,14 +12,6 @@ class User(Model):
         self.first_name = first_name
         self.last_name = last_name
 
-    def load_from_row(self, row):
-        if not row:
-            return None
-        self.id = row[0]
-        self.username = row[1]
-        self.first_name = row[2]
-        self.last_name = row[3]
-
     def _insert(self):
         query = f"""
         INSERT INTO {self.table_name} (id, username, first_name, last_name) VALUES (?, ?, ?, ?)
@@ -40,3 +32,21 @@ class User(Model):
         values = (self.username, self.first_name, self.last_name, self.id)
         self.db_manager.execute(query, values)
         return self
+
+    def full_name(self):
+        full_name = ""
+        if self.first_name:
+            full_name = self.first_name
+        if self.last_name:
+            full_name = f"{full_name} {self.last_name}"
+        if full_name == " ":
+            full_name = f"@{self.username}"
+        return full_name
+
+    def load_from_row(self, row):
+        if not row:
+            return None
+        self.id = row[0]
+        self.username = row[1]
+        self.first_name = row[2]
+        self.last_name = row[3]

@@ -13,7 +13,7 @@ class Quiz(Model):
         self.created_at = None
         self.updated_at = None
 
-        self.user = None
+        self._user = None
         self.questions = []
 
     def _insert(self):
@@ -40,9 +40,9 @@ class Quiz(Model):
         if self.user_id:
             from app.models.user import User
 
-            self.user = User(id=self.user_id).get()
-
-        return self.user
+            self._user = User(id=self.user_id).get()
+            print(f"User {self._user.username} is loaded")
+        return self._user
 
     def questions(self):
         query = """
@@ -57,3 +57,14 @@ class Quiz(Model):
 
             self.questions.append(Question(id=row["id"]).get())
         return self.questions
+
+    def load_from_row(self, row):
+        if not row:
+            return None
+        # If row is a tuple, map indices to attributes based on your schema order
+        # id, user_id, title, description, status
+        self.id = row[0]
+        self.user_id = row[1]
+        self.title = row[2]
+        self.description = row[3]
+        self.status = row[4]

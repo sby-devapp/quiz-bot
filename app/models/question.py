@@ -21,11 +21,12 @@ class Question(Model):
         self.options = options if options is not None else []
         self.status = status
         self.explanation = explanation
+        self.correct_anwser_id = 0
 
         self.created_at = None
         self.updated_at = None
 
-        self.quiz = None
+        self._quiz = None
 
     def _insert(self):
         query = """
@@ -80,9 +81,10 @@ class Question(Model):
             self.created_at = row[7]
             self.updated_at = row[8]
 
-    def get_quiz(self):
+    def quiz(self):
         from app.models.quiz import Quiz
 
         if self.quiz_id:
-            self.quiz = Quiz(id=self.quiz_id).get()
-        return self.quiz
+            self._quiz = Quiz(id=self.quiz_id).get()
+            print(f"Quiz {self._quiz.title} is Loaded")
+        return self._quiz

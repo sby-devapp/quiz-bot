@@ -6,6 +6,8 @@ from app.services.user_service import UserService
 from app.models.question import Question
 import random
 
+from app.views.poll_view import PollView
+
 # Make sure to import or define ChatService and UserService
 # from app.services.chat_service import ChatService
 # from app.services.user_service import UserService
@@ -43,22 +45,20 @@ class Controller:
     async def send_question(
         self, chat, poll: Question, context: ContextTypes.DEFAULT_TYPE
     ):
-        # Shuffle the options and keep track of the correct answer's index
-        options = poll.options[:]
-        random.shuffle(options)
-        correct_answer = poll.options[0]
-        correct_option_id = options.index(correct_answer)
 
         if poll.media_url:
             await context.bot.send_animation(chat_id=chat.id, animation=poll.media_url)
 
+        formated_poll = PollView(poll)
+        p = formated_poll.get_formated_poll()
+
         poll_message = await context.bot.send_poll(
             chat_id=chat.id,
-            question=poll.question,
-            options=options,
+            question=p.question,
+            options=p.options,
             type="quiz",
-            correct_option_id=correct_option_id,
-            explanation=poll.explanation,
+            correct_option_id=p.correct_anwser_id,
+            explanation=p.explanation,
             is_anonymous=False,
         )
         chat.last_message_sent_at = (
