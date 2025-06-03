@@ -12,9 +12,9 @@ PRAGMA encoding = "UTF-8";
 
 CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY,
-    username TEXT NOT NULL UNIQUE,
-    first_name TEXT NOT NULL,
-    last_name TEXT NOT NULL,
+    username TEXT,
+    first_name TEXT,
+    last_name TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
