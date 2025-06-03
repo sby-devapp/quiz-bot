@@ -22,6 +22,7 @@ class ChatController(Controller):
         self.application.add_handler(CommandHandler("stop", self.stop))
         self.application.add_handler(CommandHandler("question", self.random_question))
         self.application.add_handler(CommandHandler("set_schedule", self.set_schedule))
+        self.application.add_handler(CommandHandler("test", self.test))
         # Add more handlers specific to chat functionality here
 
     async def start(self, update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -117,3 +118,24 @@ class ChatController(Controller):
             await update.message.reply_text(
                 "Usage: /set_schedule [minutes]   minutes should be greater than 10."
             )
+
+    async def test(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        question = (
+            f"line 1 <br>"
+            f"line 2 <br>"
+            f"line 3 <br>"
+            f"line 4 <br>"
+            f"line 5 <br>"
+            f"line 6 <br>"
+            f"line 7 <br>"
+            f"line 8 <br>"
+        )
+        options = ["Option A", "Option B", "Option C", "Option D"]
+        await update.message.reply_poll(
+            question,
+            options,
+            type="quiz",
+            correct_option_id=1,
+            is_anonymous=False,
+            parse_mode="HTML",
+        )
