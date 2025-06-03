@@ -43,10 +43,9 @@ class PollView:
         self.formated_poll.question = (
             f"[Quiz: {quiz.title} ] [Q:ID= {self.poll.id} ]\n"
             f"{self.break_line}\n"
-            f"{self.poll.question}\n"
-            f"{self.break_line}\n"
-            f"Published by:\n"
-            f"{user.full_name()}\n"
+            f"{self.poll.question}\n\n"
+            f"{self.break_line}\n\n"
+            f"Added by: {user.full_name()}\n"
         )
         return self
 
