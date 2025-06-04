@@ -52,6 +52,9 @@ class Controller:
         formated_poll = PollView(poll)
         p = formated_poll.get_formated_poll()
 
+        await context.bot.send_message(
+            chat_id=chat.id, text=poll.question, parse_mode="MarkDownV2"
+        )
         poll_message = await context.bot.send_poll(
             chat_id=chat.id,
             question=p.question,

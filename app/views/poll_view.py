@@ -3,7 +3,7 @@ import random
 
 
 class PollView:
-    break_line = "-" * 40
+    break_line = "\-" * 40
 
     def __init__(self, poll):
         self.poll = poll
@@ -30,21 +30,10 @@ class PollView:
         return self
 
     def format_poll(self):
-        """
-        Quiz: {self.poll.title}
-        ________________________
-        Question: ID={self.poll.id} .
-        {poll.question}
-        ________________________
-        Published by: {self.poll.user().full_name()}
-        """
         quiz = self.poll.quiz()
         user = quiz.user()
         self.formated_poll.question = (
-            f"[Quiz: {quiz.title} ] [Q:ID= {self.poll.id} ]\n"
-            f"{self.break_line}\n"
-            f"{self.poll.question}\n\n"
-            f"{self.break_line}\n\n"
+            f"[Quiz: {quiz.title} ] [Q:ID\= {self.poll.id} ]\n"
             f"Added by: {user.full_name()}\n"
         )
         return self

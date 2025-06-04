@@ -75,7 +75,7 @@ class Question(Model):
             self.quiz_id = row[1]
             self.media_url = row[2]
             self.question = row[3]
-            self.options = row[4].split(",") if row[4] else []
+            self.options = row[4].split("|") if row[4] else []
             self.status = row[5]
             self.explanation = row[6]
             self.created_at = row[7]

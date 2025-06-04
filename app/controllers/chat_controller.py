@@ -120,22 +120,45 @@ class ChatController(Controller):
             )
 
     async def test(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+
+        # Escape special characters for MarkdownV2 in the question
         question = (
-            f"line 1 <br>"
-            f"line 2 <br>"
-            f"line 3 <br>"
-            f"line 4 <br>"
-            f"line 5 <br>"
-            f"line 6 <br>"
-            f"line 7 <br>"
-            f"line 8 <br>"
+            "*What will this code display?*\n"
+            "```\n"
+            "class User:\n"
+            "    def __init__(self):\n"
+            "        self.username = 'groot'\n"
+            "\n"
+            "    def get_username(self):\n"
+            "        return self.username\n"
+            "\n"
+            "    def set_username(self, username):\n"
+            "        self.username = username\n"
+            "\n"
+            "user = User()\n"
+            "user.set_username('hazel')\n"
+            "print(User().get_username())\n"
+            "```\n"
         )
-        options = ["Option A", "Option B", "Option C", "Option D"]
-        await update.message.reply_poll(
-            question,
-            options,
-            type="quiz",
-            correct_option_id=1,
+
+        # Define the options for the poll
+        options = ["groot", "hazal", "_space_", "ERROR"]
+
+        # Escape special characters for MarkdownV2 in the explanation
+        explanation = (
+            "The code calculates 2 raised to the power of 3, which equals 8\\."
+        )
+        # Escape the period (.) in the explanation for MarkdownV2
+        explanation = explanation.replace(".", "\\.")
+        await context.bot.send_message(
+            chat_id=update.effective_chat.id, text=question, parse_mode="MarkDownV2"
+        )
+        await context.bot.send_poll(
+            chat_id=update.effective_chat.id,
+            question="_________________________",
+            options=options,
             is_anonymous=False,
-            parse_mode="HTML",
+            type="quiz",
+            correct_option_id=1,  # Index of the correct answer ("groot")
+            explanation=explanation,
         )
