@@ -1,7 +1,7 @@
 INSERT OR IGNORE INTO quizzes(id, user_id, title, description,status) 
 VALUES (4 , 6038394083, "Python codes", "Simple python codes questions for starter!","published");
 
-DELETE FROM question
+DELETE FROM questions;
 
 INSERT INTO questions(quiz_id, media_url, question, options, status, explanation)
 VALUES
