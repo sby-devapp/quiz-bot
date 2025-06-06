@@ -1,3 +1,7 @@
+-- This SQL script inserts a published Python quiz and a set of multiple-choice questions into the database.
+-- Each question presents a Python code snippet (formatted using Markdown code blocks with "Python" specified for syntax highlighting)
+-- and asks for the output. The options and explanations are provided for each question.
+-- The quiz is intended for beginners to test their understanding of basic Python concepts and behaviors.
 INSERT OR IGNORE INTO quizzes(id, user_id, title, description,status) 
 VALUES (4 , 6038394083, "Python codes", "Simple python codes questions for starter!","published");
 
@@ -8,7 +12,7 @@ VALUES
     4,
     NULL,
     '*What will this code output?*\n
-    ```
+    ```Python\n
     x = [1, 2, 3]
     y = x
     y.append(4)
@@ -22,7 +26,7 @@ VALUES
     4,
     NULL,
     '*What will this code output?*\n
-    ```
+    ```Python\n
     a = 5
     b = 2
     print(a // b)
@@ -35,7 +39,7 @@ VALUES
     4,
     NULL,
     '*What will this code output?*\n
-    ```
+    ```Python\n
     def foo(x=[]):
         x.append(1)
         return x
@@ -50,7 +54,7 @@ VALUES
     4,
     NULL,
     '*What will this code output?*\n
-    ```
+    ```Python\n
     print("Hello" * 3)
     ```',
     'HelloHelloHello|Hello 3|Hello, Hello, Hello|Error',
@@ -61,7 +65,7 @@ VALUES
     4,
     NULL,
     '*What will this code output?*\n
-    ```
+    ```Python\n
     x = [1, 2, 3]
     print(x[3])
     ```',
@@ -73,7 +77,7 @@ VALUES
     4,
     NULL,
     '*What will this code output?*\n
-    ```
+    ```Python\n
     print(bool([]))
     ```',
     'False|True|[]|Error',
@@ -84,7 +88,7 @@ VALUES
     4,
     NULL,
     '*What will this code output?*\n
-    ```
+    ```Python\n
     print(type(lambda x: x))
     ```',
     "<class 'function'>|<class 'lambda'>|function|Error",
@@ -95,7 +99,7 @@ VALUES
     4,
     NULL,
     '*What will this code output?*\n
-    ```
+    ```Python\n
     x = "abc"
     print(x.upper())
     ```',
@@ -107,7 +111,7 @@ VALUES
     4,
     NULL,
     '*What will this code output?*\n
-    ```
+    ```Python\n
     print(2 ** 3 ** 2)
     ```',
     '512|64|256|Error',
@@ -118,7 +122,7 @@ VALUES
     4,
     NULL,
     '*What will this code output?*\n
-    ```
+    ```Python\n
     print(list(range(1, 5)))
     ```',
     '[1, 2, 3, 4]|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5, 6]|Error',
@@ -129,7 +133,7 @@ VALUES
     4,
     NULL,
     '*What will this code output?*\n
-    ```
+    ```Python\n
     print("a" + "b" * 2)
     ```',
     'abb|aabb|ab|Error',
@@ -140,7 +144,7 @@ VALUES
     4,
     NULL,
     '*What will this code output?*\n
-    ```
+    ```Python\n
     print([i for i in range(3)])
     ```',
     '[0, 1, 2]|[1, 2, 3]|[0, 1, 2, 3]|Error',
@@ -151,8 +155,8 @@ VALUES
     4,
     NULL,
     '*What will this code output?*\n
-    ```
-    print({1, 2, 2, 3})
+    ```Python\n
+    print({1, 2, 2, 3})\n
     ```',
     '{1, 2, 3}|{1, 2, 2, 3}|[1, 2, 3]|Error',
     'published',
@@ -162,8 +166,8 @@ VALUES
     4,
     NULL,
     '*What will this code output?*\n
-    ```
-    print("foo" == "Foo")
+    ```Python\n
+    print("foo" == "Foo")\n
     ```',
     'False|True|foo|Error',
     'published',
@@ -173,7 +177,7 @@ VALUES
     4,
     NULL,
     '*What will this code output?*\n
-    ```
+    ```Python\n
     print(None == 0)
     ```',
     'False|True|None|Error',
@@ -184,7 +188,7 @@ VALUES
     4,
     NULL,
     '*What will this code output?*\n
-    ```
+    ```Python\n
     print(bool("False"))
     ```',
     'True|False|None|Error',
@@ -195,8 +199,8 @@ VALUES
     4,
     NULL,
     '*What will this code output?*\n
-    ```
-    print(5 % 2)
+    ```Python\n
+    print(5 % 2)\n
     ```',
     '1|2|0|Error',
     'published',
@@ -206,7 +210,7 @@ VALUES
     4,
     NULL,
     '*What will this code output?*\n
-    ```
+    ```Python\n
     print([1, 2] + [3, 4])
     ```',
     '[1, 2, 3, 4]|[1, 2][3, 4]|[4, 6]|Error',
@@ -217,7 +221,7 @@ VALUES
     4,
     NULL,
     '*What will this code output?*\n
-    ```
+    ```Python\n
     print("abc".find("d"))
     ```',
     '-1|0|None|Error',
@@ -228,7 +232,7 @@ VALUES
     4,
     NULL,
     '*What will this code output?*\n
-    ```
+    ```Python\n
     print(len({}))
     ```',
     '0|1|None|Error',
@@ -239,8 +243,8 @@ VALUES
     4,
     NULL,
     '*What will this code output?*\n
-    ```
-    print(type([]) == list)
+    ```Python\n
+    print(type([]) == list)\n
     ```',
     'True|False|list|Error',
     'published',
@@ -250,8 +254,8 @@ VALUES
     4,
     NULL,
     '*What will this code output?*\n
-    ```
-    print(" ".join(["a", "b", "c"]))
+    ```Python\n
+    print(" ".join(["a", "b", "c"]))\n
     ```',
     'a b c|abc|a, b, c|Error',
     'published',
@@ -261,7 +265,7 @@ VALUES
     4,
     NULL,
     '*What will this code output?*\n
-    ```
+    ```Python\n
     print([i*2 for i in [1, 2, 3]])
     ```',
     '[2, 4, 6]|[1, 2, 3, 2, 4, 6]|[1, 4, 9]|Error',
@@ -272,7 +276,7 @@ VALUES
     4,
     NULL,
     '*What will this code output?*\n
-    ```
+    ```Python\n
     print("abc"[1])
     ```',
     'b|a|c|Error',
@@ -283,7 +287,7 @@ VALUES
     4,
     NULL,
     '*What will this code output?*\n
-    ```
+    ```Python\n
     print(3 in [1, 2, 3])
     ```',
     'True|False|3|Error',
@@ -305,7 +309,7 @@ VALUES
     4,
     NULL,
     '*What will this code output?*\n
-    ```
+    ```Python\n
     print("abc".replace("b", "d"))
     ```',
     'adc|abc|abd|Error',
@@ -316,7 +320,7 @@ VALUES
     4,
     NULL,
     '*What will this code output?*\n
-    ```
+    ```Python\n
     print(sum([1, 2, 3]))
     ```',
     '6|123|1|Error',
@@ -327,18 +331,18 @@ VALUES
     4,
     NULL,
     '*What will this code output?*\n
-    ```
+    ```Python\n
     print(list("abc"))
     ```',
-    '[\'a\', \'b\', \'c\']|[a, b, c]|abc|Error',
+    '["a", "b", "c"]|[a, b, c]|abc|Error',
     'published',
-    'list("abc") splits string into characters. Output: [\'a\', \'b\', \'c\'].'
+    'list("abc") splits string into characters. Output: ["a", "b", "c"].'
 ),
 (
     4,
     NULL,
     '*What will this code output?*\n
-    ```
+    ```Python\n
     print({i: i*i for i in range(2)})
     ```',
     '{0: 0, 1: 1}|{1: 1, 2: 4}|[0, 1]|Error',
@@ -349,7 +353,7 @@ VALUES
     4,
     NULL,
     '*What will this code output?*\n
-    ```
+    ```Python\n
     print("Python".lower())
     ```',
     'python|PYTHON|Python|Error',
