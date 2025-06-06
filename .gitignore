@@ -178,3 +178,4 @@ config/token.ini
 *.db
 test*
 setup*
+run*
