@@ -124,4 +124,235 @@ VALUES
     '[1, 2, 3, 4]|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5, 6]|Error',
     'published',
     'range(1,5) generates numbers 1 to 4. Output: [1, 2, 3, 4].'
-)
+),
+(
+    4,
+    NULL,
+    '*What will this code output?*\n
+    ```
+    print("a" + "b" * 2)
+    ```',
+    'abb|aabb|ab|Error',
+    'published',
+    'String multiplication has higher precedence. Output: abb.'
+),
+(
+    4,
+    NULL,
+    '*What will this code output?*\n
+    ```
+    print([i for i in range(3)])
+    ```',
+    '[0, 1, 2]|[1, 2, 3]|[0, 1, 2, 3]|Error',
+    'published',
+    'List comprehension over range(3) gives [0, 1, 2].'
+),
+(
+    4,
+    NULL,
+    '*What will this code output?*\n
+    ```
+    print({1, 2, 2, 3})
+    ```',
+    '{1, 2, 3}|{1, 2, 2, 3}|[1, 2, 3]|Error',
+    'published',
+    'Sets do not allow duplicates. Output: {1, 2, 3}.'
+),
+(
+    4,
+    NULL,
+    '*What will this code output?*\n
+    ```
+    print("foo" == "Foo")
+    ```',
+    'False|True|foo|Error',
+    'published',
+    'String comparison is case-sensitive. Output: False.'
+),
+(
+    4,
+    NULL,
+    '*What will this code output?*\n
+    ```
+    print(None == 0)
+    ```',
+    'False|True|None|Error',
+    'published',
+    'None is not equal to 0. Output: False.'
+),
+(
+    4,
+    NULL,
+    '*What will this code output?*\n
+    ```
+    print(bool("False"))
+    ```',
+    'True|False|None|Error',
+    'published',
+    'Non-empty strings are truthy. Output: True.'
+),
+(
+    4,
+    NULL,
+    '*What will this code output?*\n
+    ```
+    print(5 % 2)
+    ```',
+    '1|2|0|Error',
+    'published',
+    'Modulo operator gives remainder. Output: 1.'
+),
+(
+    4,
+    NULL,
+    '*What will this code output?*\n
+    ```
+    print([1, 2] + [3, 4])
+    ```',
+    '[1, 2, 3, 4]|[1, 2][3, 4]|[4, 6]|Error',
+    'published',
+    'List concatenation. Output: [1, 2, 3, 4].'
+),
+(
+    4,
+    NULL,
+    '*What will this code output?*\n
+    ```
+    print("abc".find("d"))
+    ```',
+    '-1|0|None|Error',
+    'published',
+    'find() returns -1 if not found. Output: -1.'
+),
+(
+    4,
+    NULL,
+    '*What will this code output?*\n
+    ```
+    print(len({}))
+    ```',
+    '0|1|None|Error',
+    'published',
+    'Empty dict has length 0. Output: 0.'
+),
+(
+    4,
+    NULL,
+    '*What will this code output?*\n
+    ```
+    print(type([]) == list)
+    ```',
+    'True|False|list|Error',
+    'published',
+    'type([]) is list. Output: True.'
+),
+(
+    4,
+    NULL,
+    '*What will this code output?*\n
+    ```
+    print(" ".join(["a", "b", "c"]))
+    ```',
+    'a b c|abc|a, b, c|Error',
+    'published',
+    'join() joins with separator. Output: a b c.'
+),
+(
+    4,
+    NULL,
+    '*What will this code output?*\n
+    ```
+    print([i*2 for i in [1, 2, 3]])
+    ```',
+    '[2, 4, 6]|[1, 2, 3, 2, 4, 6]|[1, 4, 9]|Error',
+    'published',
+    'List comprehension doubles each element. Output: [2, 4, 6].'
+),
+(
+    4,
+    NULL,
+    '*What will this code output?*\n
+    ```
+    print("abc"[1])
+    ```',
+    'b|a|c|Error',
+    'published',
+    'Index 1 is b. Output: b.'
+),
+(
+    4,
+    NULL,
+    '*What will this code output?*\n
+    ```
+    print(3 in [1, 2, 3])
+    ```',
+    'True|False|3|Error',
+    'published',
+    '3 is in the list. Output: True.'
+),
+(
+    4,
+    NULL,
+    '*What will this code output?*\n
+    ```
+    print([].append(1))
+    ```',
+    'None|[1]|1|Error',
+    'published',
+    'append() returns None. Output: None.'
+),
+(
+    4,
+    NULL,
+    '*What will this code output?*\n
+    ```
+    print("abc".replace("b", "d"))
+    ```',
+    'adc|abc|abd|Error',
+    'published',
+    'replace() replaces b with d. Output: adc.'
+),
+(
+    4,
+    NULL,
+    '*What will this code output?*\n
+    ```
+    print(sum([1, 2, 3]))
+    ```',
+    '6|123|1|Error',
+    'published',
+    'sum() adds all elements. Output: 6.'
+),
+(
+    4,
+    NULL,
+    '*What will this code output?*\n
+    ```
+    print(list("abc"))
+    ```',
+    '[\'a\', \'b\', \'c\']|[a, b, c]|abc|Error',
+    'published',
+    'list("abc") splits string into characters. Output: [\'a\', \'b\', \'c\'].'
+),
+(
+    4,
+    NULL,
+    '*What will this code output?*\n
+    ```
+    print({i: i*i for i in range(2)})
+    ```',
+    '{0: 0, 1: 1}|{1: 1, 2: 4}|[0, 1]|Error',
+    'published',
+    'Dict comprehension for 0 and 1. Output: {0: 0, 1: 1}.'
+),
+(
+    4,
+    NULL,
+    '*What will this code output?*\n
+    ```
+    print("Python".lower())
+    ```',
+    'python|PYTHON|Python|Error',
+    'published',
+    'lower() returns lowercase. Output: python.'
+);
