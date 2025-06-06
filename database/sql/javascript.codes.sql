@@ -1,3 +1,8 @@
+INSERT OR IGNORE INTO quizzes(id, user_id, title, description,status) 
+VALUES (5 , 6038394083, "Javascript codes", "Simple JavaScript codes questions for starter!","published");
+
+DELETE FROM questions WHERE quiz_id = 5;
+
 INSERT INTO questions(quiz_id, media_url, question, options, status, explanation) VALUES
 (5, NULL,
 '*What will this code output?*\n```JavaScript\n
@@ -25,4 +30,24 @@ console.log(typeof undefined)\n```', 'undefined|null|string|object', 'published'
 (5, NULL, '*What will this code output?*\n```JavaScript\nconsole.log([1,2,3].shift())\n```', '1|2|3|undefined', 'published', 'shift removes and returns first element'),
 (5, NULL, '*What will this code output?*\n```JavaScript\nconsole.log("abc".replace("b", "d"))\n```', 'adc|abc|dbc|abd', 'published', 'replace replaces first occurrence'),
 (5, NULL, '*What will this code output?*\n```JavaScript\nconsole.log(2 < 1)\n```', 'false|true|undefined|Error', 'published', '2 is not less than 1'),
-(5, NULL, '*What will this code output?*\n```JavaScript\nconsole.log(typeof null === "object")\n```', 'true|false|undefined|Error', 'published', 'typeof null is "object"');
+(5,
+NULL, 
+ '*What will this code output?*
+ ```JavaScript
+ console.log(typeof null === "object")
+ ```', 
+ 'true|false|undefined|Error', 
+ 'published', 
+ 'typeof null is "object"'),
+ (5,
+ NULL, 
+ '*What will this code output?*
+ ```JavaScript
+ var fan = function(text){
+    console.log(text)
+ };
+ fan("Groot")
+ ```', 
+ 'Groot|GROOT|text|Error', 
+ 'published', 
+ 'typeof null is "object"');
