@@ -9,6 +9,7 @@ DELETE FROM questions WHERE quiz_id = 4;
 
 INSERT INTO questions(quiz_id, media_url, question, options, status, explanation)
 VALUES
+-- Question 1
 (
     4,
     NULL,
@@ -23,6 +24,7 @@ VALUES
     'published',
     'Lists are mutable and y is a reference to x. So, appending to y also changes x. Output: [1, 2, 3, 4].'
 ),
+-- Question 2
 (
     4,
     NULL,
@@ -36,6 +38,7 @@ VALUES
     'published',
     'The // operator does integer division. 5 // 2 = 2.'
 ),
+-- Question 3
 (
     4,
     NULL,
@@ -51,6 +54,7 @@ VALUES
     'published',
     'Default mutable arguments persist between calls. Output: [1]\n[1, 1].'
 ),
+-- Question 4
 (
     4,
     NULL,
@@ -62,6 +66,7 @@ VALUES
     'published',
     'String multiplication repeats the string. Output: HelloHelloHello.'
 ),
+-- Question 5
 (
     4,
     NULL,
@@ -74,6 +79,7 @@ VALUES
     'published',
     'IndexError: list index out of range, because valid indices are 0,1,2.'
 ),
+-- Question 6
 (
     4,
     NULL,
@@ -85,6 +91,7 @@ VALUES
     'published',
     'Empty lists are falsy in Python. Output: False.'
 ),
+-- Question 7
 (
     4,
     NULL,
@@ -94,8 +101,9 @@ VALUES
     ```',
     "<class 'function'>|<class 'lambda'>|function|Error",
     'published',
-    'Lambdas are functions. Output: <class function>.'
+    "Lambdas are functions. Output: <class 'function'>."
 ),
+-- Question 8
 (
     4,
     NULL,
@@ -108,6 +116,7 @@ VALUES
     'published',
     'The upper() method returns the string in uppercase. Output: ABC.'
 ),
+-- Question 9
 (
     4,
     NULL,
@@ -119,6 +128,7 @@ VALUES
     'published',
     'Exponentiation is right-associative: 3**2=9, 2**9=512.'
 ),
+-- Question 10
 (
     4,
     NULL,
@@ -130,6 +140,7 @@ VALUES
     'published',
     'range(1,5) generates numbers 1 to 4. Output: [1, 2, 3, 4].'
 ),
+-- Question 11
 (
     4,
     NULL,
@@ -141,6 +152,7 @@ VALUES
     'published',
     'String multiplication has higher precedence. Output: abb.'
 ),
+-- Question 12
 (
     4,
     NULL,
@@ -152,6 +164,7 @@ VALUES
     'published',
     'List comprehension over range(3) gives [0, 1, 2].'
 ),
+-- Question 13
 (
     4,
     NULL,
@@ -163,6 +176,7 @@ VALUES
     'published',
     'Sets do not allow duplicates. Output: {1, 2, 3}.'
 ),
+-- Question 14
 (
     4,
     NULL,
@@ -174,6 +188,7 @@ VALUES
     'published',
     'String comparison is case-sensitive. Output: False.'
 ),
+-- Question 15
 (
     4,
     NULL,
@@ -185,6 +200,7 @@ VALUES
     'published',
     'None is not equal to 0. Output: False.'
 ),
+-- Question 16
 (
     4,
     NULL,
@@ -196,6 +212,7 @@ VALUES
     'published',
     'Non-empty strings are truthy. Output: True.'
 ),
+-- Question 17
 (
     4,
     NULL,
@@ -207,6 +224,7 @@ VALUES
     'published',
     'Modulo operator gives remainder. Output: 1.'
 ),
+-- Question 18
 (
     4,
     NULL,
@@ -218,6 +236,7 @@ VALUES
     'published',
     'List concatenation. Output: [1, 2, 3, 4].'
 ),
+-- Question 19
 (
     4,
     NULL,
@@ -229,6 +248,7 @@ VALUES
     'published',
     'find() returns -1 if not found. Output: -1.'
 ),
+-- Question 20
 (
     4,
     NULL,
@@ -240,6 +260,7 @@ VALUES
     'published',
     'Empty dict has length 0. Output: 0.'
 ),
+-- Question 21
 (
     4,
     NULL,
@@ -251,6 +272,7 @@ VALUES
     'published',
     'type([]) is list. Output: True.'
 ),
+-- Question 22
 (
     4,
     NULL,
@@ -262,6 +284,7 @@ VALUES
     'published',
     'join() joins with separator. Output: a b c.'
 ),
+-- Question 23
 (
     4,
     NULL,
@@ -273,6 +296,7 @@ VALUES
     'published',
     'List comprehension doubles each element. Output: [2, 4, 6].'
 ),
+-- Question 24
 (
     4,
     NULL,
@@ -284,6 +308,7 @@ VALUES
     'published',
     'Index 1 is b. Output: b.'
 ),
+-- Question 25
 (
     4,
     NULL,
@@ -295,6 +320,7 @@ VALUES
     'published',
     '3 is in the list. Output: True.'
 ),
+-- Question 26
 (
     4,
     NULL,
@@ -306,6 +332,7 @@ VALUES
     'published',
     'append() returns None. Output: None.'
 ),
+-- Question 27
 (
     4,
     NULL,
@@ -317,6 +344,7 @@ VALUES
     'published',
     'replace() replaces b with d. Output: adc.'
 ),
+-- Question 28
 (
     4,
     NULL,
@@ -328,6 +356,7 @@ VALUES
     'published',
     'sum() adds all elements. Output: 6.'
 ),
+-- Question 29
 (
     4,
     NULL,
@@ -339,6 +368,7 @@ VALUES
     'published',
     'list("abc") splits string into characters. Output: ["a", "b", "c"].'
 ),
+-- Question 30
 (
     4,
     NULL,
@@ -350,6 +380,7 @@ VALUES
     'published',
     'Dict comprehension for 0 and 1. Output: {0: 0, 1: 1}.'
 ),
+-- Question 31
 (
     4,
     NULL,
@@ -359,5 +390,5 @@ VALUES
     ```',
     'groot|GROOT|Groot|Error',
     'published',
-    'lower() returns lowercase. Output: python.'
+    'lower() returns lowercase. Output: groot.'
 );
