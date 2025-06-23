@@ -1,8 +1,11 @@
-INSERT OR IGNORE INTO quizzes(id, user_id, title, description,status) 
-VALUES (6 , 6038394083, "Php codes", "Simple Php codes questions for starter!","published");
+-- Insert or ignore existing quiz entry
+INSERT OR IGNORE INTO quizzes(id, user_id, title, description, status)
+VALUES (6, 6038394083, "Php codes", "Simple Php codes questions for starter!", "published");
 
-DELETE FROM questions WHERE quiz_id = 5;
+-- Delete existing questions for this quiz to avoid duplication
+DELETE FROM questions WHERE quiz_id = 6;
 
+-- Insert 30 PHP Questions
 INSERT INTO questions(quiz_id, media_url, question, options, status, explanation) VALUES
 
 -- 1
@@ -85,7 +88,7 @@ $b = 5;
 echo ($a === $b);
 ?>
 ```',
-    '1|Empty|true|false', 
+    'false|1|Empty|true', 
     'published', 
     'Strict equality (===) checks both value and type. String "5" is not equal to integer 5.'
 ),
@@ -159,7 +162,7 @@ function myFunction() {
 }
 ?>
 ```',
-    'func|function|def|define', 
+    'function|func|def|define', 
     'published', 
     'Functions are defined using the "function" keyword.'
 ),
@@ -315,7 +318,7 @@ $str = "HELLO WORLD";
 echo strtolower($str);
 ?>
 ```',
-    'tolower()|strtolower()|lower()|lcfirst()', 
+    'strtolower()|tolower()|lower()|lcfirst()', 
     'published', 
     'strtolower() converts all characters in a string to lowercase.'
 ),
@@ -384,7 +387,7 @@ function test() {
 test();
 ?>
 ```',
-    '5|Nothing|Error|0', 
+    'Error|5|Nothing|0', 
     'published', 
     'Variables inside a function have local scope. $x is not accessible inside the function.'
 ),
@@ -469,7 +472,7 @@ include("missing_file.php");
 include_once("config.php");
 ?>
 ```',
-    'include|require|include_once|None', 
+    'include_once|include|require|None', 
     'published', 
     'include_once() ensures that a file is included only once during execution.'
 ),
