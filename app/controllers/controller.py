@@ -42,9 +42,7 @@ class Controller:
         """
         return self.get_user(update, context), self.get_chat(update, context)
 
-    async def send_question(
-        self, chat, poll: Question, context: ContextTypes.DEFAULT_TYPE
-    ):
+    async def send_question(self, chat, poll: Question, context: ContextTypes.DEFAULT_TYPE):
 
         if poll.media_url:
             await context.bot.send_animation(chat_id=chat.id, animation=poll.media_url)
@@ -64,13 +62,12 @@ class Controller:
             explanation=p.explanation,
             is_anonymous=False,
         )
-        chat.last_message_sent_at = (
-            poll_message.date if hasattr(poll_message, "date") else None
-        )
-        chat.last_message_id = (
-            poll_message.message_id if hasattr(poll_message, "message_id") else None
-        )
+        chat.last_message_sent_at = (poll_message.date if hasattr(poll_message, "date") else None)
+        chat.last_message_id = (poll_message.message_id if hasattr(poll_message, "message_id") else None)
         chat.save()
+        self.chatService.update_sent_question_logs(chat_id=chat.id, question_id=poll.id)
+
+
 
     async def _is_admin_owner(
         self, update: Update, context: ContextTypes.DEFAULT_TYPE

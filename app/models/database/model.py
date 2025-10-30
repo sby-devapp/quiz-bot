@@ -48,6 +48,7 @@ class Model:
             return self._insert()
 
     def get(self):
+        temp_id = self.id
         if not self.id:
             raise ValueError("ID must be set to get a record")
         query = f"""
@@ -58,7 +59,9 @@ class Model:
         cursor = self.db_manager.db.cursor()
         cursor.execute(query, (self.id,))
         row = cursor.fetchone()
-        self.load_from_row(row)
+        self.load_object_from_row(row)
+        self.id = temp_id
+        cursor.close()
         return self
 
     def delete(self):
@@ -79,7 +82,7 @@ class Model:
         rows = []
         for row in results:
             obj = cls()
-            obj.load_from_row(row)
+            obj.load_object_from_row(row)
             rows.append(obj)
         return rows
 
@@ -94,7 +97,7 @@ class Model:
         rows = []
         for row in results:
             obj = cls()
-            obj.load_from_row(row)
+            obj.load_object_from_row(row)
             rows.append(obj)
         return rows
 
@@ -105,9 +108,9 @@ class Model:
         rows = []
         for row in results:
             obj = cls()
-            obj.load_from_row(row)
+            obj.load_object_from_row(row)
             rows.append(obj)
         return rows
 
-    def load_from_row(self, row):
+    def load_object_from_row(self, row):
         raise ValueError("Not imeplement it yet!")

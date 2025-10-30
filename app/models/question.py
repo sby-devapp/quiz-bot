@@ -1,3 +1,4 @@
+import random
 from app.models.database.model import Model
 
 
@@ -69,7 +70,7 @@ class Question(Model):
         cursor.close()
         return self
 
-    def load_from_row(self, row):
+    def load_object_from_row(self, row):
         if row:
             self.id = row[0]
             self.quiz_id = row[1]
@@ -88,3 +89,36 @@ class Question(Model):
             self._quiz = Quiz(id=self.quiz_id).get()
             print(f"Quiz {self._quiz.title} is Loaded")
         return self._quiz
+    
+
+
+    @classmethod
+    def get_random_question(cls, settings=None):
+        if not settings or not hasattr(settings, 'chat_id'):
+            raise ValueError("settings must have 'chat_id'")
+
+        query = """
+        SELECT q.id, COALESCE(sq.sent_count, 0) AS sent_count
+        FROM questions q
+        JOIN quizzes quiz ON q.quiz_id = quiz.id
+        LEFT JOIN sent_questions_log sq ON q.id = sq.question_id AND sq.chat_id = ?
+        WHERE q.status = 'published'
+            AND quiz.status = 'published'
+        ORDER BY COALESCE(sq.sent_count, 0) ASC, RANDOM()
+        LIMIT 10;
+        """ 
+        try:
+            result = cls.db_manager.execute(query, (settings.chat_id,))
+            rows = result.fetchall()
+            if not rows:
+                return None
+
+            selected = random.choice(rows)
+            # Replace with your actual Question class import
+            from app.models.question import Question  # 👈 adjust as needed
+            return Question(id=selected["id"]).get()
+        finally:
+            print("")
+
+
+   

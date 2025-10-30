@@ -15,20 +15,39 @@
 
 class DBManager:
     db = None
-    db_file_name = "database/db/database.db"
+    db_location = "database/db/"
+    db_file_name = f"database"
+
+    @classmethod
+    def initialize(cls):
+        """
+        Initialize the database connection.
+        If db_file_name is provided, it will use that to connect to the database.
+        """
+        cls.execute_sql_file("database/sql/schema.sql")
+        cls.execute_sql_file("database/sql/data.proposal_lines.sql")
+        cls.execute_sql_file("database/sql/data.gossip_lines.sql")
 
     @classmethod
     def connect(cls, db_file_name=None):
+
         if db_file_name:
             import sqlite3
 
             cls.db_file_name = db_file_name
-            cls.db = sqlite3.connect(cls.db_file_name)
+
+            db_path = cls.db_location + cls.db_file_name + ".db"
+            cls.db = sqlite3.connect(db_path)
+            cls.db.row_factory = sqlite3.Row
+            print(f"Connecting to database at {db_path}")
 
         if cls.db is None:
             import sqlite3
 
-            cls.db = sqlite3.connect(cls.db_file_name)
+            db_path = cls.db_location + cls.db_file_name + ".db"
+            cls.db = sqlite3.connect(db_path)
+            cls.db.row_factory = sqlite3.Row
+            print(f"Connecting to database at {db_path}")
         return cls.db
 
     @classmethod
@@ -56,7 +75,7 @@ class DBManager:
         if cls.is_connected():
             cls.connect()
             raise Exception("Database connection is not established.")
-        with open(file_path, "r") as file:
+        with open(file_path, "r", encoding="utf-8") as file:  # <-- add encoding
             sql_script = file.read()
         cursor = cls.db.cursor()
         cursor.executescript(sql_script)

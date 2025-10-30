@@ -41,7 +41,6 @@ class Quiz(Model):
             from app.models.user import User
 
             self._user = User(id=self.user_id).get()
-            print(f"User {self._user.username} is loaded")
         return self._user
 
     def questions(self):
@@ -58,13 +57,14 @@ class Quiz(Model):
             self.questions.append(Question(id=row["id"]).get())
         return self.questions
 
-    def load_from_row(self, row):
+    def load_object_from_row(self, row):
         if not row:
             return None
         # If row is a tuple, map indices to attributes based on your schema order
         # id, user_id, title, description, status
-        self.id = row[0]
-        self.user_id = row[1]
-        self.title = row[2]
-        self.description = row[3]
-        self.status = row[4]
+        
+        self.id = row["id"]
+        self.user_id = row["user_id"]
+        self.title = row["title"]
+        self.description = row["description"]
+        self.status = row["status"]

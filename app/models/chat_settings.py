@@ -38,7 +38,7 @@ class ChatSettings(Model):
         self.created_at = created_at
         self.updated_at = updated_at
 
-    def load_from_row(self, row):
+    def load_object_from_row(self, row):
         (
             self.id,
             self.chat_id,
@@ -80,13 +80,14 @@ class ChatSettings(Model):
             self.keep_receiving_questions,
             self.chat_id,
         )
+
         return self.db_manager.execute(query, params)
 
     def get(self):
         query = f"SELECT * FROM {self.table_name} WHERE id = ?"
         row = self.db_manager.fetchone(query, (self.id,))
         if row:
-            self.load_from_row(row)
+            self.load_object_from_row(row)
         return self
 
     @classmethod
@@ -98,7 +99,9 @@ class ChatSettings(Model):
         cursor.close()
 
         if row:
-            return ChatSettings().load_from_row(row)
+            chat_setting = ChatSettings()
+            chat_setting.load_object_from_row(row)
+            return chat_setting
         return None
 
     def default_settings(self):

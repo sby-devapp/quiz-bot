@@ -10,13 +10,7 @@ class Chat(Model):
     table_name = "chats"
 
     def __init__(
-        self,
-        id=None,
-        username=None,
-        type=None,
-        last_message_id=None,
-        last_message_sent_at=None,
-    ):
+        self, id=None, username=None, type=None, last_message_id=None, last_message_sent_at=None ):
         self.id = id
         self.username = username
         self.type = type  # type of chat, e.g., 'private', 'group'
@@ -46,7 +40,10 @@ class Chat(Model):
     def _update(self):
         query = f"""
         UPDATE {self.table_name}
-        SET username = ?, last_message_id = ?, last_message_sent_at = ?
+        SET username = ?, 
+            last_message_id = ?, 
+            last_message_sent_at = ?, 
+            updated_at = CURRENT_TIMESTAMP
         WHERE id = ?
         """
         params = (
@@ -55,6 +52,7 @@ class Chat(Model):
             self.last_message_sent_at,
             self.id,
         )
+        
         self.db_manager.execute(query, params)
         return self
 
@@ -95,25 +93,11 @@ class Chat(Model):
         self.id = None
         return self
 
-    def save(self):
-        if self.is_exists():
-            return self._update()
-        else:
-            return self._insert()
-
-    @classmethod
-    def get_random_question(cls, settings=None):
-        query = "SELECT id FROM questions WHERE status = 'published' ORDER BY RANDOM() LIMIT 1"
-        cursor = cls.db_manager.db.cursor()
-        cursor = cursor.execute(query)
-        result = cursor.fetchone()
-
-        if result:
-            question_id = result[0]
-            question = Question(id=question_id)
-            return question.get()
-        else:
-            return None
+    def get_random_question(self):
+        if self._settings is None:
+            self.settings()
+        question = Question.get_random_question(settings=self._settings)
+        return question
 
     def settings(self):
         """
@@ -147,11 +131,31 @@ class Chat(Model):
         chats = []
         for row in results:
             chat = cls(
-                id=row[0],
-                username=row[1],
-                last_message_id=row[2],
-                last_message_sent_at=row[3],
+                id=row["id"],
+                username=row["username"],
+                last_message_id=row["last_message_id"],
+                last_message_sent_at=row["last_message_sent_at"],
             )
             chats.append(chat)
 
         return chats
+
+    def load_object_from_row(self, row):
+        self.id = row["id"]
+        self.username = row["username"]
+        self.last_message_id = row["last_message_id"]
+        self.last_message_sent_at = row["last_message_sent_at"]
+        return self
+    
+    @classmethod
+    def update_sent_question_logs(cls, chat_id, question_id):
+        query = """
+        INSERT INTO sent_questions_log (chat_id, question_id, sent_count, first_sent_at, last_sent_at)
+        VALUES (?, ?, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+        ON CONFLICT(chat_id, question_id) DO UPDATE SET
+        sent_count = sent_count + 1,
+        last_sent_at = CURRENT_TIMESTAMP;
+        """
+    
+        # Use DBManager's execute (handles connection/commit)
+        cls.db_manager.execute(query, (chat_id, question_id))

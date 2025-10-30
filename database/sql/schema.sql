@@ -7,6 +7,7 @@ DROP TABLE IF EXISTS quizzes;
 DROP TABLE IF EXISTS chat_settings;
 DROP TABLE IF EXISTS chats;
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS sent_questions_log;
 
 PRAGMA encoding = "UTF-8";
 
@@ -95,6 +96,18 @@ CREATE TABLE IF NOT EXISTS session_settings (
     FOREIGN KEY (session_id) REFERENCES sessions(id) ON DELETE CASCADE
 );
 
+
+CREATE TABLE IF NOT EXISTS sent_questions_log (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    chat_id INTEGER NOT NULL,
+    question_id INTEGER NOT NULL,
+    sent_count INTEGER DEFAULT 1,
+    first_sent_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    last_sent_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (chat_id) REFERENCES chats(id) ON DELETE CASCADE,
+    FOREIGN KEY (question_id) REFERENCES questions(id) ON DELETE CASCADE,
+    UNIQUE(chat_id, question_id)
+);
 
 
 

@@ -43,7 +43,7 @@ class User(Model):
             full_name = f"@{self.username}"
         return full_name
 
-    def load_from_row(self, row):
+    def load_object_from_row(self, row):
         if not row:
             return None
         self.id = row[0]

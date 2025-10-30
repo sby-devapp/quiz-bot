@@ -13,5 +13,14 @@ class ChatService:
         )
         return chat_db.save()
 
-    def get_random_question(self, settings=None):
-        return Chat.get_random_question(settings)
+
+    
+    def get_random_question(self, chat_id):
+        return Chat(id=chat_id).get_random_question()
+    
+    
+    def update_sent_question_logs(self, chat_id, question_id ):
+        Chat.update_sent_question_logs(chat_id, question_id)
+    
+
+    
