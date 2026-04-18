@@ -59,10 +59,8 @@ class QuestionController(Controller):
             CommandHandler("add_question", self.adding_question)
         )
         self.application.add_handler(MessageHandler(filters.POLL, self.handle_poll))
-        self.application.add_handler(
-            CommandHandler("save_question", self.save_question)
-        )
-        self.application.add_handler(PollHandler(self.listning_questions))
+        self.application.add_handler(CommandHandler("save_question", self.save_question))
+        #self.application.add_handler(PollHandler(self.listning_questions))
         # Add more handlers specific to question functionality here
 
     async def adding_question(
@@ -77,7 +75,7 @@ class QuestionController(Controller):
         if poll:
             question = poll.question
             options = poll.options
-            print_question(poll)
+            #print_question(poll)
             await update.message.reply_text(
                 f"Question received: {question}\nOptions: {', '.join([option.text for option in options])}"
             )
@@ -90,7 +88,7 @@ class QuestionController(Controller):
         # Placeholder for saving logic
         if update.message.reply_to_message and update.message.reply_to_message.poll:
             poll = update.message.reply_to_message.poll
-            print_question(poll)
+            #print_question(poll)
 
     async def quiz(self, update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         # Placeholder for quiz logic
@@ -102,9 +100,7 @@ class QuestionController(Controller):
             explanation="2+2=4",
         )
 
-    async def listning_questions(
-        self, update: Update, context: ContextTypes.DEFAULT_TYPE
-    ):
+    async def listning_questions(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         poll = update.poll
         print("_" * 40)
         print(f"Listning on Poll {poll.id}... ")
