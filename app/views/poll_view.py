@@ -33,7 +33,7 @@ class PollView:
         quiz = self.poll.quiz()
         user = quiz.user()
         self.formated_poll.question = (
-            f"[Quiz: {quiz.title} ] [Q:ID\= {self.poll.id} ]\n"
+            f"[Quiz: `{quiz.title}` ] [Q: `{self.poll.id}`]\n"
             f"Added by: {user.full_name()}\n"
         )
         return self
