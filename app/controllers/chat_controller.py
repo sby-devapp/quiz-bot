@@ -33,8 +33,9 @@ class ChatController(Controller):
             return
         # Add chat-specific setup here
         user, chat = self.get_user_chat(update, context)
-        chat.settings().keep_receiving_questions = "yes"
-        chat._settings.save()
+        settings = chat.settings()
+        settings.keep_receiving_questions = "yes"
+        settings.save()
 
         full_name = ""
         if user.first_name:

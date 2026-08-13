@@ -6,17 +6,15 @@ VALUES (7, 6038394083, "Python POO", "Simple Python POO questions for starter!",
 DELETE FROM questions WHERE quiz_id = 7;
 
 -- Insert 30 Python OOP Questions
-INSERT INTO questions(quiz_id, media_url, question, options, status, explanation) VALUES
+INSERT INTO questions(quiz_id, media_url, question, code_block, options, status, explanation) VALUES
 
 -- 1
 (
     7,
     NULL,
-    'What keyword is used to define a class in Python?
-```python
-class MyClass:
-    pass
-```',
+    'What keyword is used to define a class in Python?',
+    'class MyClass:
+pass',
     'class|def|object|new',
     'published',
     'The "class" keyword is used to define a class in Python.'
@@ -26,12 +24,10 @@ class MyClass:
 (
     7,
     NULL,
-    'Which method is called automatically when an object is created?
-```python
-class Dog:
-    def __init__(self, name):
-        self.name = name
-```',
+    'Which method is called automatically when an object is created?',
+    'class Dog:
+def __init__(self, name):
+    self.name = name',
     '__init__|__start__|__create__|__new__',
     'published',
     '__init__ is the constructor method called when an object is instantiated.'
@@ -41,16 +37,14 @@ class Dog:
 (
     7,
     NULL,
-    'What is the output of this code?
-```python
-class Car:
-    def __init__(self, color):
-        self.color = color
+    'What is the output of this code?',
+    'class Car:
+def __init__(self, color):
+    self.color = color
 
 car1 = Car("red")
 car2 = Car("blue")
-print(car1.color)
-```',
+print(car1.color)',
     'red|blue|None|Error',
     'published',
     'car1.color was assigned "red" during initialization.'
@@ -60,12 +54,10 @@ print(car1.color)
 (
     7,
     NULL,
-    'How do you define a method inside a class?
-```python
-class Person:
-    def greet(self):
-        print("Hello")
-```',
+    'How do you define a method inside a class?',
+    'class Person:
+def greet(self):
+    print("Hello")',
     'def within class|function within class|method|lambda',
     'published',
     'Methods are defined with "def" inside the class body.'
@@ -75,12 +67,10 @@ class Person:
 (
     7,
     NULL,
-    'What does self refer to in a class?
-```python
-class Cat:
-    def __init__(self, name):
-        self.name = name
-```',
+    'What does self refer to in a class?',
+    'class Cat:
+def __init__(self, name):
+    self.name = name',
     'Instance of the class|Class itself|Other instance|Nothing',
     'published',
     '"self" refers to the instance of the class being created or used.'
@@ -90,13 +80,11 @@ class Cat:
 (
     7,
     NULL,
-    'What is the output?
-```python
-class Student:
-    school = "ABC High"
+    'What is the output?',
+    'class Student:
+school = "ABC High"
 
-print(Student.school)
-```',
+print(Student.school)',
     'ABC High|None|Error|"school"',
     'published',
     'Class attributes can be accessed directly via the class name.'
@@ -106,16 +94,14 @@ print(Student.school)
 (
     7,
     NULL,
-    'What is the output?
-```python
-class Point:
-    def __init__(self, x=0, y=0):
-        self.x = x
-        self.y = y
+    'What is the output?',
+    'class Point:
+def __init__(self, x=0, y=0):
+    self.x = x
+    self.y = y
 
 p = Point()
-print(p.x, p.y)
-```',
+print(p.x, p.y)',
     '0 0|None None|Error|1 1',
     'published',
     'Default values are used if no arguments are passed to the constructor.'
@@ -125,13 +111,11 @@ print(p.x, p.y)
 (
     7,
     NULL,
-    'How do you create an instance of a class in Python?
-```python
-class Book:
-    pass
+    'How do you create an instance of a class in Python?',
+    'class Book:
+pass
 
-# Create instance here
-```',
+# Create instance here',
     'Book()|new Book()|book.new()|instance(Book)',
     'published',
     'You create an instance by calling the class like a function: Book().'
@@ -141,14 +125,12 @@ class Book:
 (
     7,
     NULL,
-    'What will happen?
-```python
-class Animal:
-    pass
+    'What will happen?',
+    'class Animal:
+pass
 
 a = Animal()
-print(type(a))
-```',
+print(type(a))',
     "<class 'Animal'>|<class 'object'>|Error|None",
     'published',
     'The type of an instance shows the class it was created from.'
@@ -158,19 +140,17 @@ print(type(a))
 (
     7,
     NULL,
-    'What is the output?
-```python
-class Counter:
-    count = 0
+    'What is the output?',
+    'class Counter:
+count = 0
 
-    def increment(self):
-        self.count += 1
+def increment(self):
+    self.count += 1
 
 c1 = Counter()
 c2 = Counter()
 c1.increment()
-print(c2.count)
-```',
+print(c2.count)',
     '0|1|2|Error',
     'published',
     'When accessing count via c1, it becomes an instance attribute; c2 still sees the class variable.'
@@ -180,11 +160,9 @@ print(c2.count)
 (
     7,
     NULL,
-    'What concept allows multiple inheritance in Python?
-```python
-class Child(Parent1, Parent2):
-    pass
-```',
+    'What concept allows multiple inheritance in Python?',
+    'class Child(Parent1, Parent2):
+pass',
     'Multiple Inheritance|Polymorphism|Encapsulation|Hierarchical Inheritance',
     'published',
     'Python supports multiple inheritance where a class can inherit from more than one parent.'
@@ -194,18 +172,16 @@ class Child(Parent1, Parent2):
 (
     7,
     NULL,
-    'What is the output?
-```python
-class A:
-    def say(self):
-        print("A")
+    'What is the output?',
+    'class A:
+def say(self):
+    print("A")
 
 class B(A):
-    pass
+pass
 
 b = B()
-b.say()
-```',
+b.say()',
     'A|B|nothing|Error',
     'published',
     'B inherits the say() method from A and uses it.'
@@ -215,19 +191,17 @@ b.say()
 (
     7,
     NULL,
-    'What is the output?
-```python
-class X:
-    def hello(self):
-        print("X")
+    'What is the output?',
+    'class X:
+def hello(self):
+    print("X")
 
 class Y(X):
-    def hello(self):
-        print("Y")
+def hello(self):
+    print("Y")
 
 y = Y()
-y.hello()
-```',
+y.hello()',
     'Y|X|Both|Error',
     'published',
     'Method overriding allows a child class to redefine a method from the parent.'
@@ -237,12 +211,10 @@ y.hello()
 (
     7,
     NULL,
-    'How do you call the parent class''s constructor?
-```python
-class Child(Parent):
-    def __init__(self):
-        super().__init__()
-```',
+    'How do you call the parent class''s constructor?',
+    'class Child(Parent):
+def __init__(self):
+    super().__init__()',
     'super().__init__()|Parent.__init__()|self.__init__()|both',
     'published',
     'super().__init__() is the preferred way to call the parent class’s constructor.'
@@ -252,12 +224,10 @@ class Child(Parent):
 (
     7,
     NULL,
-    'Which principle restricts direct access to some components of an object?
-```python
-class BankAccount:
-    def __init__(self):
-        self.__balance = 0
-```',
+    'Which principle restricts direct access to some components of an object?',
+    'class BankAccount:
+def __init__(self):
+    self.__balance = 0',
     'Encapsulation|Inheritance|Polymorphism|Abstraction',
     'published',
     'Encapsulation hides internal details using private variables (e.g., __balance).'
@@ -267,15 +237,13 @@ class BankAccount:
 (
     7,
     NULL,
-    'What is the output?
-```python
-class Test:
-    def __init__(self):
-        self.__a = 10
+    'What is the output?',
+    'class Test:
+def __init__(self):
+    self.__a = 10
 
 t = Test()
-print(t.__a)
-```',
+print(t.__a)',
     'AttributeError|10|None|NameError',
     'published',
     'Private attributes cannot be accessed directly outside the class.'
@@ -285,15 +253,13 @@ print(t.__a)
 (
     7,
     NULL,
-    'Which statement about abstraction is true?
-```python
-from abc import ABC, abstractmethod
+    'Which statement about abstraction is true?',
+    'from abc import ABC, abstractmethod
 
 class Shape(ABC):
-    @abstractmethod
-    def area(self):
-        pass
-```',
+@abstractmethod
+def area(self):
+    pass',
     'Abstract classes prevent instantiation|Abstract methods have implementation|Concrete classes use ABCMeta|None',
     'published',
     'Abstract classes cannot be instantiated unless all abstract methods are overridden.'
@@ -303,13 +269,11 @@ class Shape(ABC):
 (
     7,
     NULL,
-    'Which error occurs when trying to instantiate an abstract class without implementing its abstract method?
-```python
-class Circle(Shape):
-    pass
+    'Which error occurs when trying to instantiate an abstract class without implementing its abstract method?',
+    'class Circle(Shape):
+pass
 
-c = Circle()
-```',
+c = Circle()',
     'TypeError|ValueError|SyntaxError|NameError',
     'published',
     'Cannot instantiate abstract class without implementing all abstract methods.'
@@ -319,19 +283,17 @@ c = Circle()
 (
     7,
     NULL,
-    'What is the purpose of polymorphism?
-```python
-class Rectangle:
-    def draw(self):
-        print("Rectangle")
+    'What is the purpose of polymorphism?',
+    'class Rectangle:
+def draw(self):
+    print("Rectangle")
 
 class Circle:
-    def draw(self):
-        print("Circle")
+def draw(self):
+    print("Circle")
 
 def render(shape):
-    shape.draw()
-```',
+shape.draw()',
     'Same interface, different behavior|Same behavior for all objects|Hiding data|Code reuse',
     'published',
     'Polymorphism allows different classes to be used interchangeably through a common interface.'
@@ -341,19 +303,17 @@ def render(shape):
 (
     7,
     NULL,
-    'What is the output?
-```python
-class Bird:
-    def fly(self):
-        print("Flies")
+    'What is the output?',
+    'class Bird:
+def fly(self):
+    print("Flies")
 
 class Airplane(Bird):
-    def fly(self):
-        print("Airplane flies")
+def fly(self):
+    print("Airplane flies")
 
 for obj in [Bird(), Airplane()]:
-    obj.fly()
-```',
+obj.fly()',
     'Flies\\nAirplane flies|Bird\\nAirplane|Error|None',
     'published',
     'Polymorphism allows calling the same method on different objects with different results.'
@@ -363,15 +323,13 @@ for obj in [Bird(), Airplane()]:
 (
     7,
     NULL,
-    'Which keyword defines an interface-like structure in Python?
-```python
-from abc import ABC, abstractmethod
+    'Which keyword defines an interface-like structure in Python?',
+    'from abc import ABC, abstractmethod
 
 class Interface(ABC):
-    @abstractmethod
-    def method(self):
-        pass
-```',
+@abstractmethod
+def method(self):
+    pass',
     'abstract|interface|abstractmethod|None',
     'published',
     'Using ABC and abstractmethod creates an interface-like structure.'
@@ -381,16 +339,14 @@ class Interface(ABC):
 (
     7,
     NULL,
-    'What is composition in OOP?
-```python
-class Engine:
-    def start(self):
-        print("Engine started")
+    'What is composition in OOP?',
+    'class Engine:
+def start(self):
+    print("Engine started")
 
 class Car:
-    def __init__(self):
-        self.engine = Engine()
-```',
+def __init__(self):
+    self.engine = Engine()',
     'Using objects as parts of other objects|Child-parent relationship|Data hiding|Multiple inheritance',
     'published',
     'Composition involves building complex objects from simpler ones as components.'
@@ -400,19 +356,17 @@ class Car:
 (
     7,
     NULL,
-    'What is the output?
-```python
-class A:
-    def __init__(self):
-        print("A")
+    'What is the output?',
+    'class A:
+def __init__(self):
+    print("A")
 
 class B(A):
-    def __init__(self):
-        print("B")
-        super().__init__()
+def __init__(self):
+    print("B")
+    super().__init__()
 
-B()
-```',
+B()',
     'B then A|A then B|Only B|Only A',
     'published',
     'Calling super().__init__() executes the parent class constructor after the child’s.'
@@ -422,15 +376,13 @@ B()
 (
     7,
     NULL,
-    'What is the output?
-```python
-class Person:
-    def __init__(self, name):
-        self._name = name
+    'What is the output?',
+    'class Person:
+def __init__(self, name):
+    self._name = name
 
 p = Person("Alice")
-print(p._name)
-```',
+print(p._name)',
     'Alice|Error|None|Protected',
     'published',
     'Single underscore indicates protected members, but it’s not enforced strictly in Python.'
@@ -440,15 +392,13 @@ print(p._name)
 (
     7,
     NULL,
-    'Which of these correctly describes encapsulation?
-```python
-class Person:
-    def __init__(self, age):
-        self.__age = age
+    'Which of these correctly describes encapsulation?',
+    'class Person:
+def __init__(self, age):
+    self.__age = age
 
-    def get_age(self):
-        return self.__age
-```',
+def get_age(self):
+    return self.__age',
     'Hiding data behind methods|Allowing multiple constructors|Reusing code|Inheriting from multiple classes',
     'published',
     'Encapsulation hides internal state and only exposes it through controlled methods.'
@@ -458,14 +408,12 @@ class Person:
 (
     7,
     NULL,
-    'Which operator checks if an object is an instance of a class?
-```python
-class Animal:
-    pass
+    'Which operator checks if an object is an instance of a class?',
+    'class Animal:
+pass
 
 a = Animal()
-print(isinstance(a, Animal))
-```',
+print(isinstance(a, Animal))',
     'isinstance|type|classof|typeof',
     'published',
     'isinstance(obj, Class) checks whether obj is an instance of the given class.'
@@ -475,16 +423,14 @@ print(isinstance(a, Animal))
 (
     7,
     NULL,
-    'Which keyword prevents overriding a method?
-```python
-class Base:
-    def foo(self):
-        print("Base foo")
+    'Which keyword prevents overriding a method?',
+    'class Base:
+def foo(self):
+    print("Base foo")
 
 class Derived(Base):
-    def foo(self):
-        print("Derived foo")
-```',
+def foo(self):
+    print("Derived foo")',
     'No keyword exists|final|sealed|static',
     'published',
     'Python does not enforce final methods natively, though it can be simulated.'
@@ -494,16 +440,14 @@ class Derived(Base):
 (
     7,
     NULL,
-    'What is the output?
-```python
-class MyMeta(type):
-    pass
+    'What is the output?',
+    'class MyMeta(type):
+pass
 
 class MyClass(metaclass=MyMeta):
-    pass
+pass
 
-print(type(MyClass))
-```',
+print(type(MyClass))',
     '<class ''MyMeta''>|<class ''type''>|Error|None',
     'published',
     'A metaclass controls how a class is created — here, MyClass has a custom metaclass.'
@@ -513,15 +457,13 @@ print(type(MyClass))
 (
     7,
     NULL,
-    'What is a class method decorated with @classmethod able to modify?
-```python
-class Pizza:
-    size = "large"
+    'What is a class method decorated with @classmethod able to modify?',
+    'class Pizza:
+size = "large"
 
-    @classmethod
-    def change_size(cls, new_size):
-        cls.size = new_size
-```',
+@classmethod
+def change_size(cls, new_size):
+    cls.size = new_size',
     'Class attributes|Instance attributes|Global variables|Local variables',
     'published',
     '@classmethod receives the class as the first argument and can modify class-level attributes.'
@@ -531,15 +473,13 @@ class Pizza:
 (
     7,
     NULL,
-    'What is the output?
-```python
-class Math:
-    @staticmethod
-    def add(x, y):
-        return x + y
+    'What is the output?',
+    'class Math:
+@staticmethod
+def add(x, y):
+    return x + y
 
-print(Math.add(2, 3))
-```',
+print(Math.add(2, 3))',
     '5|Error|None|Math',
     'published',
     'Static methods belong to the class but do not receive any special first argument.'

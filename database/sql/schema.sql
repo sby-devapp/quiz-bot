@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS chats (
     username TEXT,
     type TEXT DEFAULT 'private',  -- e.g., 'private', 'group', 'channel'
     last_message_id INTEGER,
+    last_text_message_id INTEGER,
     last_message_sent_at TIMESTAMP, -- Time of the last message in the chat
 
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -61,11 +62,12 @@ DROP TABLE IF EXISTS questions;
 CREATE TABLE IF NOT EXISTS questions (
     id INTEGER PRIMARY KEY,
     quiz_id INTEGER NOT NULL,
-    media_url TEXT,  -- URL to media file (image, video, etc.) 
+    media_url TEXT,
     question TEXT NOT NULL,
-    options TEXT NOT NULL,  -- JSON array of options, first option is the correct one
-    status TEXT DEFAULT 'draft', -- e.g. 'published', 'pending'
-    explanation TEXT, 
+    code_block TEXT,
+    options TEXT NOT NULL,  -- pipe-separated, first option is the correct one
+    status TEXT DEFAULT 'draft',
+    explanation TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (quiz_id) REFERENCES quizzes(id) ON DELETE CASCADE

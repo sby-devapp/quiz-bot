@@ -17,3 +17,9 @@ SELECT id, username, first_name, last_name, created_at, updated_at FROM users_ol
 
 -- 4. Drop the old table
 DROP TABLE users_old;
+
+
+
+UPDATE chat_settings
+SET keep_receiving_questions = 'yes'
+WHERE chat_id = -1002542675444;

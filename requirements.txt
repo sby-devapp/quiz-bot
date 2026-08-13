@@ -1,2 +1,7 @@
-python-telegram-bot>=20.0
-python-telegram-bot[job-queue]>=20.0
+# Core Telegram bot library (install latest available)
+python-telegram-bot
+python-telegram-bot[job-queue]
+
+# Optional but useful for configuration and HTTP requests (install latest available)
+python-dotenv
+requests

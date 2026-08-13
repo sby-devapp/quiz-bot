@@ -2,18 +2,12 @@ import logging
 
 from telegram import Update
 from telegram.error import Forbidden, BadRequest
-from telegram.ext import ContextTypes, CommandHandler
+from telegram.ext import ContextTypes
 
 from app.services.chat_service import ChatService
 from app.services.user_service import UserService
 from app.models.question import Question
-import random
-
 from app.views.poll_view import PollView
-
-# Make sure to import or define ChatService and UserService
-# from app.services.chat_service import ChatService
-# from app.services.user_service import UserService
 
 
 class Controller:
@@ -26,59 +20,66 @@ class Controller:
         print("Setting up the controller")
 
     def get_chat(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
-        """
-        Returns the chat object from the update.
-        """
         chat = update.effective_chat
         return self.chatService.save(chat)
 
     def get_user(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
-        """
-        Returns the chat object from the update.
-        """
         user = update.effective_user
         return self.userService.save(user)
 
     def get_user_chat(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
-        """
-        Saves the user and chat information from the update.
-        """
         return self.get_user(update, context), self.get_chat(update, context)
 
-    async def send_question(self, chat, poll: Question, context: ContextTypes.DEFAULT_TYPE):
+    async def _delete_last_question(self, chat, context: ContextTypes.DEFAULT_TYPE):
+        if not chat.last_message_id:
+            return
         try:
-            if poll.media_url:
-                await context.bot.send_animation(chat_id=chat.id, animation=poll.media_url)
+            poll = await context.bot.stop_poll(chat_id=chat.id, message_id=chat.last_message_id)
+            if poll.total_voter_count == 0:
+                try:
+                    await context.bot.delete_message(chat_id=chat.id, message_id=chat.last_message_id)
+                except BadRequest:
+                    pass
+        except BadRequest:
+            pass
 
-            formated_poll = PollView(poll)
-            p = formated_poll.get_formated_poll()
+    async def send_question(self, chat, question: Question, context: ContextTypes.DEFAULT_TYPE):
+        if question is None:
+            logging.warning(f"No question available for chat {chat.id}, skipping.")
+            return
+        try:
+            await self._delete_last_question(chat, context)
 
-            await context.bot.send_message(
-                chat_id=chat.id, text=poll.question, parse_mode="MarkdownV2"
-            )
+            prepared_poll = PollView(question).prepare()
+
             poll_message = await context.bot.send_poll(
                 chat_id=chat.id,
-                question=p.question,
-                options=p.options,
+                question=prepared_poll.question,
+                options=prepared_poll.options,
                 type="quiz",
-                correct_option_id=p.correct_anwser_id,
-                explanation=p.explanation,
+                correct_option_id=0,
+                explanation=prepared_poll.explanation,
                 is_anonymous=False,
+                description=prepared_poll.description,
+                description_parse_mode=prepared_poll.description_parse_mode,
+                media=prepared_poll.media,
+                shuffle_options=True,
             )
-            chat.last_message_sent_at = (poll_message.date if hasattr(poll_message, "date") else None)
-            chat.last_message_id = (poll_message.message_id if hasattr(poll_message, "message_id") else None)
+
+            chat.last_message_id = poll_message.message_id
+            chat.last_message_sent_at = poll_message.date
             chat.save()
-            self.chatService.update_sent_question_logs(chat_id=chat.id, question_id=poll.id)
+            self.chatService.update_sent_question_logs(chat_id=chat.id, question_id=question.id)
 
         except Forbidden as e:
-            logging.info(f"Bot was blocked/kicked from chat {chat.id}. Marking as inactive. Error: {e}")
+            logging.info(f"Bot blocked/kicked from chat {chat.id}, marking inactive. Error: {e}")
             self._deactivate_chat(chat)
 
         except BadRequest as e:
             err_msg = str(e).lower()
             dead_chat_keywords = ["chat not found", "group chat was upgraded", "supergroup"]
             if any(kw in err_msg for kw in dead_chat_keywords):
-                logging.info(f"Marking chat {chat.id} as inactive due to Telegram error.")
+                logging.info(f"Marking chat {chat.id} as inactive due to: {e}")
                 self._deactivate_chat(chat)
             else:
                 logging.error(f"Non-fatal Telegram error for chat {chat.id}: {e}")
@@ -88,15 +89,7 @@ class Controller:
         settings.keep_receiving_questions = "no"
         settings.save()
 
-
-
-    async def _is_admin_owner(
-        self, update: Update, context: ContextTypes.DEFAULT_TYPE
-    ) -> bool:
-        """
-        Checks if the user is an admin or owner in the chat.
-        Returns True if admin/owner, False otherwise.
-        """
+    async def _is_admin_owner(self, update: Update, context: ContextTypes.DEFAULT_TYPE) -> bool:
         chat = update.effective_chat
         user = update.effective_user
         if chat.type not in ["group", "supergroup"]:

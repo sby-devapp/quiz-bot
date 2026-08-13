@@ -10,49 +10,51 @@ class Chat(Model):
     table_name = "chats"
 
     def __init__(
-        self, id=None, username=None, type=None, last_message_id=None, last_message_sent_at=None ):
+        self, id=None, username=None, type=None, last_message_id=None, last_text_message_id=None, last_message_sent_at=None):
         self.id = id
         self.username = username
-        self.type = type  # type of chat, e.g., 'private', 'group'
+        self.type = type
         self.last_message_id = last_message_id
+        self.last_text_message_id = last_text_message_id
         self.last_message_sent_at = last_message_sent_at
         self.user = None
         self._settings = None
 
     def _insert(self):
         query = f"""
-        INSERT INTO {self.table_name} (id, username, last_message_id, last_message_sent_at)
-        VALUES ( ?, ?, ?, ?)
+        INSERT INTO {self.table_name} (id, username, last_message_id, last_text_message_id, last_message_sent_at)
+        VALUES (?, ?, ?, ?, ?)
         """
         params = (
             self.id,
             self.username,
             self.last_message_id,
+            self.last_text_message_id,
             self.last_message_sent_at,
         )
         cursor = self.db_manager.db.cursor()
         cursor.execute(query, params)
         self.id = cursor.lastrowid
         cursor.close()
-
         return self
 
     def _update(self):
         query = f"""
         UPDATE {self.table_name}
-        SET username = ?, 
-            last_message_id = ?, 
-            last_message_sent_at = ?, 
+        SET username = ?,
+            last_message_id = ?,
+            last_text_message_id = ?,
+            last_message_sent_at = ?,
             updated_at = CURRENT_TIMESTAMP
         WHERE id = ?
         """
         params = (
             self.username,
             self.last_message_id,
+            self.last_text_message_id,
             self.last_message_sent_at,
             self.id,
         )
-        
         self.db_manager.execute(query, params)
         return self
 
@@ -116,7 +118,7 @@ class Chat(Model):
         if not cls.db_manager.is_connected():
             cls.db_manager.connect()
         query = """
-        SELECT c.id, c.username, c.last_message_id, c.last_message_sent_at
+        SELECT c.id, c.username, c.last_message_id, c.last_text_message_id, c.last_message_sent_at
         FROM chats c
         INNER JOIN chat_settings cs ON c.id = cs.chat_id
         WHERE cs.keep_receiving_questions = 'yes'
@@ -134,16 +136,17 @@ class Chat(Model):
                 id=row["id"],
                 username=row["username"],
                 last_message_id=row["last_message_id"],
+                last_text_message_id=row["last_text_message_id"],
                 last_message_sent_at=row["last_message_sent_at"],
             )
             chats.append(chat)
-
         return chats
 
     def load_object_from_row(self, row):
         self.id = row["id"]
         self.username = row["username"]
         self.last_message_id = row["last_message_id"]
+        self.last_text_message_id = row["last_text_message_id"]
         self.last_message_sent_at = row["last_message_sent_at"]
         return self
     

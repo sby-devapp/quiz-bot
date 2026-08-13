@@ -43,6 +43,10 @@ class User(Model):
             full_name = f"@{self.username}"
         return full_name
 
+    def profile_link(self):
+        name = self.full_name()
+        return f'<a href="tg://user?id={self.id}">{name}</a>'
+
     def load_object_from_row(self, row):
         if not row:
             return None

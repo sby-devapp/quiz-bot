@@ -49,9 +49,8 @@ def print_question(poll):
 class QuestionController(Controller):
 
     def __init__(self, application=None):
+        super().__init__(application)
         print("AddingQuestion initialized")
-        if application is not None:
-            self.application = application
 
     def setup(self):
         self.application.add_handler(CommandHandler("quiz", self.quiz))
