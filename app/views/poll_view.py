@@ -43,22 +43,19 @@ class PollView:
         parts = []
 
         if self._quiz and self._user:
-                    parts.append(
-                        f"[Quiz: {self._quiz.title}] [Q: {self.question.id}]\n"
-                        f"Added by: {self._user.profile_link()}\n"
-                        f"--------------------------------------------"
-                    )
+            parts.append(
+                f"Quiz: {self._quiz.title}\n"
+                f"QID: {self.question.id}, Added by: {self._user.profile_link()}\n"
+                f"--------------------------------------------"
+            )
 
         if self.question.code_block:
             code = (
-                self.question.code_block
-                .replace("&", "&amp;")
+                self.question.code_block.replace("&", "&amp;")
                 .replace("<", "&lt;")
                 .replace(">", "&gt;")
             )
             parts.append(f"<pre><code>{code}</code></pre>")
-
-        
 
         if parts:
             self.prepared.description = "\n".join(parts)

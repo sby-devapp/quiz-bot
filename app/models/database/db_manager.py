@@ -25,10 +25,12 @@ class DBManager:
     @classmethod
     def connect(cls, db_file_name=None):
         import sqlite3
+
         if db_file_name:
             cls.db_file_name = db_file_name
         if cls.db is None:
             db_path = cls.db_location + cls.db_file_name + ".db"
+            print(f"trying to connect to database at {db_path}")
             cls.db = sqlite3.connect(db_path)
             cls.db.row_factory = sqlite3.Row
             print(f"Connecting to database at {db_path}")
