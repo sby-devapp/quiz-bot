@@ -1,3 +1,3 @@
 
-print("hello word !!1")
+print("hello word !!1"*3)
     

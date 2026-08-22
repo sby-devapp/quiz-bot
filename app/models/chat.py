@@ -28,7 +28,7 @@ class Chat(Model):
     def _insert(self):
         query = f"""
         INSERT INTO {self.table_name} (id, username, last_message_id, last_message_sent_at)
-        VALUES (?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?)
         """
         params = (
             self.id,
@@ -81,10 +81,10 @@ class Chat(Model):
         chats = []
         for row in results:
             chat = Chat(
-                id=row[0],
-                username=row[1],
-                last_message_id=row[2],
-                last_message_sent_at=row[3],
+                id=row["id"],
+                username=row["username"],
+                last_message_id=row["last_message_id"],
+                last_message_sent_at=row["last_message_sent_at"],
             )
             chats.append(chat)
         return chats
